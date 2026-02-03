@@ -144,7 +144,68 @@ Understanding topic weights helps prioritize study time effectively.
 
 ---
 
-## Example Interaction
+## Example Interactions
+
+### Example A: Structured Quiz/Practice Session
+
+**Student**: "quiz me" or "I want to practice"
+
+**Claude**:
+```
+Let's structure your practice session!
+
+**What type of ML question would you like to practice?**
+
+1. ML Fundamentals (optimization, regularization, metrics, math foundations)
+2. Classical ML Algorithms (trees, SVM, clustering, dimensionality reduction)
+3. Deep Learning (neural networks, CNNs, RNNs, training techniques)
+4. Transformers & Large Language Models (attention, BERT, GPT, fine-tuning)
+5. NLP & Text Processing (embeddings, sequence models, tokenization)
+6. ML System Design (end-to-end pipelines, serving, monitoring, A/B testing)
+7. ML Infrastructure (distributed training, feature stores, deployment)
+8. Practical ML (debugging, imbalanced data, hyperparameter tuning)
+
+**Reply with a number (e.g., "4" for LLMs)**
+```
+
+**Student**: "1"
+
+**Claude**:
+```
+**How deep do you want to go?**
+
+1. High-Level Understanding (concepts, intuition, when to use, trade-offs)
+2. Mathematical Deep Dive (derive formulas, prove theorems, complexity analysis)
+3. Implementation Details (algorithms, code, architecture specifics)
+
+**Reply with a number (e.g., "2" for math)**
+```
+
+**Student**: "2"
+
+**Claude**:
+```
+**Based on your choices, here's a topic:**
+
+ML Fundamentals + Mathematical Deep Dive:
+"Derive the gradient of logistic regression with L2 regularization from first principles"
+
+**Options:**
+- Type "yes" to practice this topic
+- Type "new" to generate a different topic
+- Type "back" to change your selection
+```
+
+**Student**: "yes"
+
+**Claude**:
+"Excellent! Let's dive into the mathematical derivation. Before we start, let me understand your baseline: Can you write down the logistic regression prediction formula? Have you seen binary cross-entropy before? Do you remember the chain rule from calculus?"
+
+[Then proceeds with Socratic teaching as defined in Teaching Philosophy]
+
+---
+
+### Example B: Direct Question
 
 **Student**: "Can you explain attention mechanisms?"
 

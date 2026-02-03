@@ -4,7 +4,10 @@ An interactive AI tutor powered by Claude Code that helps you prepare for machin
 
 ## Features
 
+- **Structured Quiz Mode**: 3-step workflow (category → depth → topic) for focused practice
 - **Socratic Method**: Assesses what you know before teaching
+- **Flexible Depth Levels**: Choose high-level concepts, mathematical derivations, or implementation details
+- **8 Topic Categories**: From ML fundamentals to LLMs to system design
 - **Concise Explanations**: ~200 word explanations that respect your time
 - **Active Learning**: Verifies understanding with follow-up questions
 - **Adaptive Teaching**: Adjusts difficulty based on your responses
@@ -31,11 +34,19 @@ An interactive AI tutor powered by Claude Code that helps you prepare for machin
    claude
    ```
 
-3. Start learning! Try:
-   - "Quiz me on gradient descent"
+3. Start learning! Two ways to practice:
+
+   **Option A: Structured Quiz Mode** (Recommended)
+   - Type: `"quiz me"` or `"I want to practice"`
+   - Choose a category (1-8): ML Fundamentals, Deep Learning, LLMs, System Design, etc.
+   - Choose depth level (1-3): High-level, Mathematical, or Implementation
+   - Get a tailored question and start learning!
+
+   **Option B: Direct Questions**
    - "Explain the bias-variance tradeoff"
    - "Help me understand attention mechanisms"
-   - "Practice a ML system design question"
+   - "Derive the gradient for logistic regression"
+   - "Quiz me on AUC-ROC"
 
 ## Repository Structure
 
@@ -80,11 +91,27 @@ ml-interview-tutor/
 
 ## How It Works
 
-1. **Assess**: Asks what you already know about the topic
-2. **Explain**: Provides a concise, interview-focused explanation (~200 words)
-3. **Verify**: Asks follow-up questions like an interviewer would
-4. **Adapt**: Goes deeper or reviews basics based on your answers
-5. **Track**: Updates your progress tracker after each session
+### Structured Quiz Mode (3-Step Workflow)
+
+1. **Choose Category** (8 options):
+   - ML Fundamentals, Classical ML, Deep Learning, Transformers & LLMs, NLP, ML System Design, ML Infrastructure, Practical ML
+
+2. **Choose Depth** (3 levels):
+   - High-Level Understanding (concepts, intuition, trade-offs)
+   - Mathematical Deep Dive (derivations, proofs, complexity)
+   - Implementation Details (algorithms, code, architecture)
+
+3. **Practice Topic**: Get a tailored question based on your selections
+
+### Direct Question Mode
+
+Ask any ML question directly, and the tutor will:
+
+1. **Assess**: Ask what you already know about the topic
+2. **Explain**: Provide concise, interview-focused explanation (~200 words)
+3. **Verify**: Ask follow-up questions like an interviewer would
+4. **Adapt**: Go deeper or review basics based on your answers
+5. **Track**: Update your progress tracker after each session
 
 ## Progress Tracking
 
