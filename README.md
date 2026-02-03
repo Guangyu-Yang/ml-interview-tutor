@@ -8,7 +8,8 @@ An interactive AI tutor powered by Claude Code that helps you prepare for machin
 - **Concise Explanations**: ~200 word explanations that respect your time
 - **Active Learning**: Verifies understanding with follow-up questions
 - **Adaptive Teaching**: Adjusts difficulty based on your responses
-- **Progress Tracking**: Remembers your strengths and areas to review
+- **Progress Tracking**: Tracks topics mastered, knowledge gaps, and interview readiness
+- **Session History**: Maintains detailed notes from each study session
 
 ## Getting Started
 
@@ -36,71 +37,78 @@ An interactive AI tutor powered by Claude Code that helps you prepare for machin
    - "Help me understand attention mechanisms"
    - "Practice a ML system design question"
 
+## Repository Structure
+
+```
+ml-interview-tutor/
+├── CLAUDE.md                    # Instructions for Claude Code
+├── README.md                    # This file
+├── progress/
+│   └── ml-study-tracker.md      # Your progress tracker (single source of truth)
+└── sessions/
+    ├── SESSION-TEMPLATE.md      # Template for session notes
+    └── YYYY-MM-DD/
+        └── session-notes.md     # Daily session details
+```
+
 ## ML Interview Topics Covered
 
-### Fundamentals
-- Linear algebra, probability, statistics
-- Gradient descent & optimization
-- Bias-variance tradeoff
-- Regularization (L1, L2, dropout)
-- Cross-validation & evaluation metrics
+### By Priority (based on interview frequency)
 
-### Classical ML
-- Linear/logistic regression
-- Decision trees & random forests
-- SVM, KNN, Naive Bayes
-- Clustering (K-means, DBSCAN)
-- Dimensionality reduction (PCA, t-SNE)
+| Domain | Weight | Key Topics |
+|--------|--------|------------|
+| Deep Learning | 25% | Transformers, attention, CNNs, RNNs, backprop |
+| ML Fundamentals | 20% | Gradient descent, bias-variance, regularization |
+| ML System Design | 18% | Pipelines, serving, A/B testing, monitoring |
+| Classical ML | 15% | Trees, SVM, clustering, logistic regression |
+| NLP | 12% | Embeddings, BERT, language models |
+| Practical ML | 10% | Debugging, imbalanced data, tuning |
 
-### Deep Learning
-- Neural network architectures (MLP, CNN, RNN, Transformer)
-- Backpropagation
-- Activation functions
-- Batch normalization, layer normalization
-- Attention mechanisms
+### Detailed Topics
 
-### NLP
-- Word embeddings (Word2Vec, GloVe)
-- RNNs, LSTMs, GRUs
-- Transformers & BERT
-- Language models & fine-tuning
+**Fundamentals**: Linear algebra, probability, optimization, loss functions, evaluation metrics
 
-### ML Systems & Design
-- Feature engineering
-- Training pipelines
-- Model serving & inference
-- A/B testing
-- Handling data drift
+**Classical ML**: Linear/logistic regression, decision trees, random forests, XGBoost, SVM, clustering, PCA
 
-### Practical ML
-- Debugging models
-- Hyperparameter tuning
-- Dealing with imbalanced data
-- Scaling & distributed training
+**Deep Learning**: Neural networks, backpropagation, CNNs, RNNs/LSTMs, Transformers, attention mechanisms, normalization
+
+**NLP**: Word embeddings, sequence models, BERT, GPT, fine-tuning
+
+**System Design**: Feature engineering, training pipelines, model serving, A/B testing, monitoring, data drift
+
+**Practical**: Debugging models, handling imbalanced data, hyperparameter tuning, interpretability
 
 ## How It Works
 
 1. **Assess**: Asks what you already know about the topic
-2. **Explain**: Provides a concise, interview-focused explanation
-3. **Verify**: Asks follow-up questions (like an interviewer would)
+2. **Explain**: Provides a concise, interview-focused explanation (~200 words)
+3. **Verify**: Asks follow-up questions like an interviewer would
 4. **Adapt**: Goes deeper or reviews basics based on your answers
-5. **Track**: Updates your profile for personalized sessions
+5. **Track**: Updates your progress tracker after each session
 
-## Customization
+## Progress Tracking
 
-Edit `memory/learner-profile.md` to:
-- Set target companies/roles
-- Mark topics you're confident in
-- Flag areas needing review
-- Track mock interview performance
+Your progress is tracked in two places:
+
+1. **`/progress/ml-study-tracker.md`** - Overall progress, topics mastered, knowledge gaps, interview readiness
+2. **`/sessions/YYYY-MM-DD/session-notes.md`** - Detailed notes from each study session
 
 ## Interview Prep Tips
 
-- Practice explaining concepts out loud
-- Use the "teach back" technique
-- Focus on intuition, not just formulas
-- Be ready to discuss trade-offs
-- Know your projects deeply
+- Practice explaining concepts out loud (interviewers assess communication)
+- Focus on intuition first, math second
+- Always discuss trade-offs (shows senior thinking)
+- Know your projects deeply - expect follow-up questions
+- Ask clarifying questions - it's a green flag
+
+## Teaching Philosophy
+
+This tutor follows the Socratic method:
+- Questions before answers
+- Build on what you already know
+- Guide discovery, don't lecture
+- Verify understanding before moving on
+- Adapt to your level
 
 ## License
 
