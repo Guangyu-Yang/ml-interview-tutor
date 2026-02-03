@@ -314,3 +314,126 @@ When the student initiates a conversation:
 5. Periodically assess overall progress and suggest focus areas
 
 **Remember**: The goal is not just to help them pass interviews, but to deeply understand ML concepts that will serve them throughout their career.
+
+---
+
+## 🏠 Airbnb-Specific ML Topics
+
+Since your target is Airbnb, focus on these topics from their engineering blog:
+
+### Search & Ranking (Core to Airbnb)
+- **Two-stage ranking**: Retrieval (candidate generation) → Ranking (scoring)
+- **Embedding-Based Retrieval (EBR)**: Using embeddings to narrow candidate pool
+- **Learning to Rank**: GBDT → Neural Networks evolution
+- **Diversity in ranking**: Balancing relevance with variety
+- **Position bias**: Accounting for where items appear in results
+
+**Key Paper**: "Applying Deep Learning to Airbnb Search" (2018)
+
+### Embeddings (Heavily Used at Airbnb)
+- **Listing embeddings**: Learn representations from user click sequences
+- **Similar to Word2Vec**: Treat user sessions as "sentences", listings as "words"
+- **Applications**: Similar listing recommendations, real-time personalization
+- **Training**: Skip-gram on booking sessions, negative sampling
+- **Cold start**: Handling new listings with no interaction data
+
+**Key Blog**: "Listing Embeddings for Similar Listing Recommendations"
+
+### Recommendation Systems
+- **Personalization**: Real-time user preference modeling
+- **Experience ranking**: Ranking non-accommodation products
+- **Context-aware recommendations**: Location, dates, group size
+- **Multi-objective optimization**: Relevance vs. conversion vs. diversity
+
+### Dynamic Pricing & Demand Prediction
+- **Smart Pricing**: Predicting optimal listing prices
+- **Demand forecasting**: Seasonality, events, market dynamics
+- **Survival analysis**: Modeling time-to-booking
+- **Price elasticity**: How price changes affect booking probability
+
+### Computer Vision
+- **Amenity detection**: Identifying amenities from listing photos
+- **Image classification**: Categorizing room types
+- **Photo quality scoring**: Ranking listing photos
+- **Object detection**: Identifying specific features in images
+
+### NLP & Conversational AI
+- **Customer support chatbots**: Task-oriented dialog systems
+- **Intent classification**: Understanding user queries
+- **Document retrieval**: Finding relevant help articles
+- **Text generation**: AI-assisted response drafting
+- **Voice support**: IVR systems with ML
+
+**Key Blog**: "Task-Oriented Conversational AI in Airbnb Customer Support"
+
+### Feature Engineering
+- **Chronon**: Airbnb's declarative feature engineering framework
+- **Feature stores**: Consistent features between training and serving
+- **Real-time features**: Computing features at inference time
+- **Feature freshness**: Balancing compute cost vs. feature staleness
+
+### Causal Inference & Experimentation
+- **A/B testing at scale**: Experimentation platform
+- **Artificial Counterfactual Estimation (ACE)**: When A/B tests aren't possible
+- **Causal ML**: Combining ML with causal inference
+- **Heterogeneous treatment effects**: Personalized impact estimation
+
+### Categories & Classification
+- **Human-in-the-loop ML**: Combining ML with human review
+- **Active learning**: Efficiently labeling data
+- **Multi-label classification**: Listings in multiple categories
+- **Quality scoring**: Predicting listing quality
+
+---
+
+## Airbnb Interview Question Examples
+
+Based on their tech blog, expect questions like:
+
+### System Design
+- "Design a search ranking system for Airbnb listings"
+- "How would you build a similar listings recommendation feature?"
+- "Design the ML pipeline for dynamic pricing"
+- "How would you detect fraudulent listings?"
+
+### Embeddings & Retrieval
+- "How would you create embeddings for listings with no booking history?"
+- "Explain how you'd use embeddings for real-time personalization"
+- "What's the trade-off between embedding dimension and performance?"
+
+### Ranking
+- "How would you handle position bias in search ranking?"
+- "Explain the two-stage ranking approach and why it's used"
+- "How would you add diversity to search results?"
+
+### Practical ML
+- "How would you evaluate a new ranking model before A/B testing?"
+- "What metrics would you use to measure search quality?"
+- "How would you handle the cold start problem for new listings?"
+
+---
+
+## Recommended Airbnb Tech Blog Posts
+
+Read these before your interview:
+
+1. **"Listing Embeddings for Similar Listing Recommendations"** (2018)
+   - Core embedding approach, skip-gram on sessions
+
+2. **"Applying Deep Learning to Airbnb Search"** (2018)
+   - Evolution from GBDT to neural networks
+
+3. **"Embedding-Based Retrieval for Airbnb Search"** (2025)
+   - Modern two-stage retrieval system
+
+4. **"Learning to Rank Diversely"** (2023)
+   - Balancing relevance and diversity
+
+5. **"Chronon: A Declarative Feature Engineering Framework"** (2023)
+   - Feature engineering at scale
+
+6. **"Task-Oriented Conversational AI in Customer Support"** (2021)
+   - NLP applications at Airbnb
+
+7. **"Artificial Counterfactual Estimation (ACE)"** (2022)
+   - Causal inference when A/B tests aren't possible
