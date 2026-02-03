@@ -1,10 +1,10 @@
 # ML Interview Study Tracker
 
-**Last Updated**: [Date]
+**Last Updated**: 2026-02-02
 
 **Target Interview Date**: [Your interview date]
 
-**Overall Interview Readiness**: [ ]% 
+**Overall Interview Readiness**: 2% 
 
 ---
 
@@ -12,7 +12,7 @@
 
 | Domain | Topics Covered | Total Topics | Status |
 |--------|---------------|--------------|--------|
-| A. ML Fundamentals (20%) | 0 | 8 | 🔴 Not Started |
+| A. ML Fundamentals (20%) | 1 | 8 | 🟡 In Progress |
 | B. Classical ML (15%) | 0 | 7 | 🔴 Not Started |
 | C. Deep Learning (25%) | 0 | 8 | 🔴 Not Started |
 | D. NLP (12%) | 0 | 6 | 🔴 Not Started |
@@ -39,7 +39,7 @@
 ### A. ML Fundamentals
 | Topic | Date Mastered | Confidence | Key Points |
 |-------|---------------|------------|------------|
-| — | — | — | — |
+| **A.8 Evaluation Metrics - AUC-ROC** | 2026-02-02 | Medium-High | • Measures ranking ability across all thresholds<br>• AUC = P(random positive ranks higher than random negative)<br>• Threshold-independent, handles imbalanced data<br>• AUC=0.5 (random), AUC=1.0 (perfect)<br>• Use AUC for flexible thresholds; Precision@k for fixed top-k<br>• ROC axes: x=FPR, y=TPR |
 
 ### B. Classical ML
 | Topic | Date Mastered | Confidence | Key Points |
@@ -91,6 +91,7 @@
 - [ ] Derive gradient descent update rules
 - [ ] Explain bias-variance tradeoff with examples
 - [ ] Compare L1 vs L2 regularization
+- [x] Explain AUC-ROC and when to use vs Precision@k
 - [ ] Calculate precision, recall, F1 from confusion matrix
 
 **Classical ML**
@@ -121,9 +122,10 @@
 ## Study Plan
 
 ### This Week's Focus
-1. [ ] [Topic 1]
-2. [ ] [Topic 2]
-3. [ ] [Topic 3]
+1. [x] A.8 AUC-ROC and evaluation metrics (COMPLETED)
+2. [ ] Related: Precision-Recall curves and PR-AUC
+3. [ ] A.7 Cross-validation and model evaluation
+4. [ ] Continue with other evaluation metrics (precision, recall, F1)
 
 ### Upcoming Topics
 - [ ] [Next priority topics]
@@ -137,7 +139,7 @@
 
 | Date | Topics Covered | Key Wins | Gaps Found |
 |------|---------------|----------|------------|
-| — | — | — | — |
+| 2026-02-02 | A.8 AUC-ROC evaluation metric | • Understood ROC curve (corrected axis confusion)<br>• Mastered AUC vs Precision@k tradeoffs<br>• Can apply to real scenarios (rec sys, fraud detection)<br>• Interview-ready for AUC questions | • Initially confused ROC axes (resolved)<br>• Needed clarification on metric selection (resolved) |
 
 ---
 
