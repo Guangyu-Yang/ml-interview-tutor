@@ -458,129 +458,6 @@ When working with the student:
 
 ---
 
-## 🏠 Airbnb-Specific ML Topics
-
-Since your target is Airbnb, focus on these topics from their engineering blog:
-
-### Search & Ranking (Core to Airbnb)
-- **Two-stage ranking**: Retrieval (candidate generation) → Ranking (scoring)
-- **Embedding-Based Retrieval (EBR)**: Using embeddings to narrow candidate pool
-- **Learning to Rank**: GBDT → Neural Networks evolution
-- **Diversity in ranking**: Balancing relevance with variety
-- **Position bias**: Accounting for where items appear in results
-
-**Key Paper**: "Applying Deep Learning to Airbnb Search" (2018)
-
-### Embeddings (Heavily Used at Airbnb)
-- **Listing embeddings**: Learn representations from user click sequences
-- **Similar to Word2Vec**: Treat user sessions as "sentences", listings as "words"
-- **Applications**: Similar listing recommendations, real-time personalization
-- **Training**: Skip-gram on booking sessions, negative sampling
-- **Cold start**: Handling new listings with no interaction data
-
-**Key Blog**: "Listing Embeddings for Similar Listing Recommendations"
-
-### Recommendation Systems
-- **Personalization**: Real-time user preference modeling
-- **Experience ranking**: Ranking non-accommodation products
-- **Context-aware recommendations**: Location, dates, group size
-- **Multi-objective optimization**: Relevance vs. conversion vs. diversity
-
-### Dynamic Pricing & Demand Prediction
-- **Smart Pricing**: Predicting optimal listing prices
-- **Demand forecasting**: Seasonality, events, market dynamics
-- **Survival analysis**: Modeling time-to-booking
-- **Price elasticity**: How price changes affect booking probability
-
-### Computer Vision
-- **Amenity detection**: Identifying amenities from listing photos
-- **Image classification**: Categorizing room types
-- **Photo quality scoring**: Ranking listing photos
-- **Object detection**: Identifying specific features in images
-
-### NLP & Conversational AI
-- **Customer support chatbots**: Task-oriented dialog systems
-- **Intent classification**: Understanding user queries
-- **Document retrieval**: Finding relevant help articles
-- **Text generation**: AI-assisted response drafting
-- **Voice support**: IVR systems with ML
-
-**Key Blog**: "Task-Oriented Conversational AI in Airbnb Customer Support"
-
-### Feature Engineering
-- **Chronon**: Airbnb's declarative feature engineering framework
-- **Feature stores**: Consistent features between training and serving
-- **Real-time features**: Computing features at inference time
-- **Feature freshness**: Balancing compute cost vs. feature staleness
-
-### Causal Inference & Experimentation
-- **A/B testing at scale**: Experimentation platform
-- **Artificial Counterfactual Estimation (ACE)**: When A/B tests aren't possible
-- **Causal ML**: Combining ML with causal inference
-- **Heterogeneous treatment effects**: Personalized impact estimation
-
-### Categories & Classification
-- **Human-in-the-loop ML**: Combining ML with human review
-- **Active learning**: Efficiently labeling data
-- **Multi-label classification**: Listings in multiple categories
-- **Quality scoring**: Predicting listing quality
-
----
-
-## Airbnb Interview Question Examples
-
-Based on their tech blog, expect questions like:
-
-### System Design
-- "Design a search ranking system for Airbnb listings"
-- "How would you build a similar listings recommendation feature?"
-- "Design the ML pipeline for dynamic pricing"
-- "How would you detect fraudulent listings?"
-
-### Embeddings & Retrieval
-- "How would you create embeddings for listings with no booking history?"
-- "Explain how you'd use embeddings for real-time personalization"
-- "What's the trade-off between embedding dimension and performance?"
-
-### Ranking
-- "How would you handle position bias in search ranking?"
-- "Explain the two-stage ranking approach and why it's used"
-- "How would you add diversity to search results?"
-
-### Practical ML
-- "How would you evaluate a new ranking model before A/B testing?"
-- "What metrics would you use to measure search quality?"
-- "How would you handle the cold start problem for new listings?"
-
----
-
-## Recommended Airbnb Tech Blog Posts
-
-Read these before your interview:
-
-1. **"Listing Embeddings for Similar Listing Recommendations"** (2018)
-   - Core embedding approach, skip-gram on sessions
-
-2. **"Applying Deep Learning to Airbnb Search"** (2018)
-   - Evolution from GBDT to neural networks
-
-3. **"Embedding-Based Retrieval for Airbnb Search"** (2025)
-   - Modern two-stage retrieval system
-
-4. **"Learning to Rank Diversely"** (2023)
-   - Balancing relevance and diversity
-
-5. **"Chronon: A Declarative Feature Engineering Framework"** (2023)
-   - Feature engineering at scale
-
-6. **"Task-Oriented Conversational AI in Customer Support"** (2021)
-   - NLP applications at Airbnb
-
-7. **"Artificial Counterfactual Estimation (ACE)"** (2022)
-   - Causal inference when A/B tests aren't possible
-
----
-
 ## 📘 Google's Rules of Machine Learning (Martin Zinkevich)
 
 Essential best practices from Google. Know these for interviews!
@@ -737,3 +614,92 @@ Essential best practices from Google. Know these for interviews!
 6. **Human heuristics contain valuable signal**
 7. **Know your freshness requirements**
 8. **Interpretability aids debugging**
+
+---
+
+## 🎯 Airbnb Topic Suggester (Subagent)
+
+When the student asks for topic suggestions, study recommendations, or "what should I learn next", activate this subagent behavior.
+
+### How to Suggest Topics
+
+1. **Read the student's progress** from `/progress/ml-study-tracker.md`
+2. **Read the Airbnb blog index** from `/references/airbnb-posts/INDEX.md`
+3. **Match gaps to relevant posts** - Find posts that address the student's knowledge gaps or align with upcoming interviews
+4. **Prioritize by interview relevance:**
+   - Search & Ranking (highest priority - core to Airbnb)
+   - Embeddings (frequently asked)
+   - Feature Engineering (training-serving skew is critical)
+   - NLP/Conversational AI (if role-relevant)
+   - Graph ML, CV (lower priority unless specific)
+
+### Output Format for Topic Suggestions
+
+```
+## 📚 Recommended Topics
+
+### 1. [Topic Name]
+**Why:** [Connection to student's gaps or interview goals]
+**Source:** [Airbnb blog post title]
+**Key Concepts:** [2-3 bullet points]
+**Sample Interview Questions:**
+- [Question 1]
+- [Question 2]
+
+### 2. [Topic Name]
+...
+```
+
+### Suggestion Triggers
+
+Activate this behavior when the student says:
+- "What should I study next?"
+- "Suggest topics"
+- "What's important for Airbnb interviews?"
+- "Recommend something based on my progress"
+- "What topics from Airbnb's blog should I focus on?"
+
+### Cross-Reference with Progress
+
+Always check:
+- Topics already mastered (don't re-suggest)
+- Identified knowledge gaps (prioritize these)
+- Interview dates (prioritize accordingly)
+- Domain weights (Deep Learning 25%, Fundamentals 20%, System Design 18%, etc.)
+
+### Example Interaction
+
+**Student:** "What should I study next for my Airbnb interview?"
+
+**Response:**
+"Let me check your progress and match it with Airbnb's actual ML systems...
+
+Based on your tracker, you've covered basic embeddings but haven't explored **retrieval systems**. This is critical for Airbnb interviews because search is their core product.
+
+## 📚 Recommended Topics
+
+### 1. Embedding-Based Retrieval (EBR)
+**Why:** You understand embeddings, but haven't seen how they're used in production retrieval. Airbnb's 2025 EBR post shows their actual architecture.
+**Source:** Embedding-Based Retrieval for Airbnb Search (2025)
+**Key Concepts:**
+- Two-tower architecture (query tower online, listing tower offline)
+- Contrastive learning for training
+- IVF vs HNSW for ANN indexing
+
+**Sample Interview Questions:**
+- 'Design a retrieval system that can handle millions of items with real-time updates'
+- 'Why might you prefer IVF over HNSW for an e-commerce search system?'
+
+### 2. Training-Serving Consistency (Chronon)
+**Why:** Your tracker shows a gap in 'Feature Engineering at Scale'. Training-serving skew is a common interview topic.
+**Source:** Chronon: A Declarative Feature Engineering Framework (2023)
+**Key Concepts:**
+- Why training and serving features can diverge
+- Temporal vs Snapshot accuracy
+- Feature freshness tradeoffs
+
+**Sample Interview Questions:**
+- 'How would you ensure your model sees the same features in training and production?'
+- 'What causes training-serving skew and how do you detect it?'
+
+Would you like to dive into either of these topics?"
