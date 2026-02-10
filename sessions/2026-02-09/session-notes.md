@@ -160,9 +160,45 @@
 - ROC axes confusion is recurring — needs targeted drilling
 - Strong at connecting concepts across topics when guided
 
+---
+
+## Topic 6: F.38 Debugging Training Issues
+
+### Student's Baseline
+- Had practical experience: restart from checkpoint, lower learning rate, gradient clipping
+- Knew to monitor loss during training
+- Good instincts but approach was unsystematic
+
+### Concepts Taught
+1. **Debugging hierarchy** — structured order: data → sanity checks → training mechanics → regularization
+2. **Initial loss sanity check** — loss should be log(k) for k classes; for LLMs with vocab 32k, expect ~10.4
+3. **Loss-to-probability conversion** — ŷ = e^(-loss), useful for interpreting LLM training progress
+4. **Overfit tiny batch** — single most powerful diagnostic, validates entire pipeline end-to-end
+5. **NaN debugging** — specific causes: log(0), exp overflow, 0/0 derivatives, data NaN, exploding gradients
+6. **Sudden NaN at step N** — weights grow over time, model overconfidence, bad data batch, LR schedule change
+7. **Overfitting vs underfitting** — opposite diagnoses, opposite fixes
+8. **L1 = Lasso** — corrected student listing them as separate techniques
+
+### Comprehension Checks
+- ✅ Understood initial loss sanity check and asked great follow-up about LLM vocab sizes
+- ✅ Good question about loss-to-probability conversion (why e⁻³)
+- ✅ Correctly identified overfitting scenario and fixes
+- ✅ Correctly identified underfitting and opposite fixes
+- ⚠️ Didn't initially think of "overfit tiny batch" as first diagnostic
+- ⚠️ Listed L1/L2/Lasso as three separate things (corrected)
+- ⚠️ Didn't fully explain why NaN appears suddenly (needed guidance on weight growth / overconfidence)
+
+### Assessment
+- **Confidence Level**: Medium-High
+- **Status**: Strong practical foundation, now has systematic interview framework
+- **Key win**: 4-row debugging summary table (overfitting, underfitting, not learning, NaN)
+
+---
+
 ## Follow-up Topics
 - C.19 CNNs (next on study plan)
 - Review BatchNorm/LayerNorm details
 - Drill ROC axes (recurring confusion)
 - Practice SHAP explanations
 - TreeSHAP deeper dive
+- A.5 Bias-variance tradeoff (naturally follows from overfitting/underfitting discussion)
