@@ -98,7 +98,7 @@ Understanding topic weights helps prioritize study time effectively.
 - B.14 Clustering (K-means, DBSCAN, hierarchical)
 - B.15 Dimensionality reduction (PCA, t-SNE, UMAP)
 
-### C. Deep Learning (25%) - HIGHEST PRIORITY
+### C. Deep Learning & RL (25%) - HIGHEST PRIORITY
 - C.16 Neural network fundamentals (forward pass, backpropagation)
 - C.17 Activation functions (ReLU, sigmoid, tanh, softmax)
 - C.18 Weight initialization and batch normalization
@@ -106,40 +106,47 @@ Understanding topic weights helps prioritize study time effectively.
 - C.20 RNNs, LSTMs, GRUs (vanishing gradients, gating mechanisms)
 - C.21 Transformers and attention mechanisms (CRITICAL - know deeply!)
 - C.22 Encoder-decoder architectures
-- C.23 Training techniques (learning rate schedules, early stopping)
+- C.23 Training techniques (learning rate schedules, early stopping, SFT, distillation)
+- C.24 RL fundamentals (MDP, Bellman equation, value functions, on/off-policy)
+- C.25 Policy gradient methods (REINFORCE, PPO, GRPO)
+- C.26 RLHF, DPO, and LLM alignment
 
-### D. NLP (12%)
+### D. NLP & Multi-Modal (12%)
 - D.24 Text preprocessing (tokenization, embeddings)
 - D.25 Word embeddings (Word2Vec, GloVe, FastText)
 - D.26 Sequence models for NLP
 - D.27 Attention and self-attention
 - D.28 BERT, GPT, and modern LLMs
 - D.29 Fine-tuning and transfer learning
+- D.30 Vision Transformers (ViT, patch embeddings, comparison to CNNs)
+- D.31 Contrastive learning and CLIP (text-image alignment, contrastive objectives)
+- D.32 Multi-modal LLMs (vision-language fusion, architectures)
+- D.33 Diffusion models and video (diffusion process, generation, video understanding)
 
 ### E. ML System Design (18%) - HIGH PRIORITY
-- E.30 End-to-end ML pipeline design
-- E.31 Feature engineering and feature stores
-- E.32 Data preprocessing and validation
-- E.33 Model training at scale (distributed training)
-- E.34 Model serving and inference optimization
-- E.35 A/B testing and experimentation
-- E.36 Monitoring, logging, and debugging production models
-- E.37 Handling data drift and model degradation
+- E.34 End-to-end ML pipeline design
+- E.35 Feature engineering and feature stores
+- E.36 Data preprocessing and validation
+- E.37 Model training at scale (distributed training)
+- E.38 Model serving and inference optimization
+- E.39 A/B testing and experimentation
+- E.40 Monitoring, logging, and debugging production models
+- E.41 Handling data drift and model degradation
 
 ### F. Practical ML & Debugging (10%)
-- F.38 Debugging training issues (loss not decreasing, NaN gradients)
-- F.39 Handling imbalanced data
-- F.40 Missing data strategies
-- F.41 Hyperparameter tuning approaches
-- F.42 Model interpretability (SHAP, feature importance)
-- F.43 Common ML pitfalls and how to avoid them
+- F.42 Debugging training issues (loss not decreasing, NaN gradients)
+- F.43 Handling imbalanced data
+- F.44 Missing data strategies
+- F.45 Hyperparameter tuning approaches
+- F.46 Model interpretability (SHAP, feature importance)
+- F.47 Common ML pitfalls and how to avoid them
 
 **Study Priority Order:**
-1. **Deep Learning (25%)** - Transformers/attention are asked constantly
+1. **Deep Learning & RL (25%)** - Transformers/attention/RLHF are asked constantly
 2. **ML Fundamentals (20%)** - Foundation for everything
 3. **ML System Design (18%)** - Senior roles emphasize this
 4. **Classical ML (15%)** - Still common in interviews
-5. **NLP (12%)** - Important for relevant roles
+5. **NLP & Multi-Modal (12%)** - Important for relevant roles
 6. **Practical ML (10%)** - Shows real experience
 
 ---
@@ -205,7 +212,44 @@ ML Fundamentals + Mathematical Deep Dive:
 
 ---
 
-### Example B: Direct Question
+### Example B: External Article/Paper/Blog
+
+**Student**: "Can you create a quiz topic from this article? [link or pasted content]"
+
+**Claude**:
+1. **Fetch and analyze** the article content (if URL provided, use WebFetch; if content pasted, read directly)
+2. **Identify key technical concepts** covered in the article
+3. **Map to study domains** (A-F) from the topic list
+4. **Generate a quiz topic** using the standard format:
+
+```
+**Here's a quiz topic based on that article:**
+
+**[Domain] + [Depth Level]:**
+
+> "[Specific question derived from the article's core concepts]"
+
+This maps to topic(s) [X.XX] in our study plan.
+
+**Options:**
+- Type "yes" to practice this topic
+- Type "new" to generate a different angle from the same article
+```
+
+5. **If student says "yes"**, proceed with Socratic teaching:
+   - Walk through the article's concepts interactively
+   - Ask what they already know about the prerequisites
+   - Build understanding step-by-step, don't just re-state the article
+   - Use comprehension checks throughout
+
+**Supported sources:**
+- Any ML-related web content: articles, blog posts, research papers, documentation, etc.
+
+**Note:** If the URL cannot be fetched (403/blocked), ask the student to paste the article content directly.
+
+---
+
+### Example C: Direct Question
 
 **Student**: "Can you explain attention mechanisms?"
 
@@ -231,13 +275,16 @@ Self-attention (used in Transformers) applies this same mechanism within a singl
 ## Repository Structure
 
 ```
-/sessions/
-  /2026-02-03/
-    session-notes.md
-  /2026-02-04/
-    session-notes.md
+/agents/                         # Specialized tutor behaviors
+/hooks/                          # Claude Code hooks
+  session-start-suggester.sh
 /progress/
-  ml-study-tracker.md  ← SINGLE comprehensive tracking file
+  ml-study-tracker.md            ← SINGLE comprehensive tracking file
+/references/                     # Reference materials
+/sessions/
+  SESSION-TEMPLATE.md
+  /YYYY-MM-DD/
+    session-notes.md
 ```
 
 ---

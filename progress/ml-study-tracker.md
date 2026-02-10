@@ -1,10 +1,10 @@
 # ML Interview Study Tracker
 
-**Last Updated**: 2026-02-09
+**Last Updated**: 2026-02-10
 
 **Target Interview Date**: [Your interview date]
 
-**Overall Interview Readiness**: 35%
+**Overall Interview Readiness**: 37%
 
 ---
 
@@ -14,8 +14,8 @@
 |--------|---------------|--------------|--------|
 | A. ML Fundamentals (20%) | 2 | 8 | 🟡 In Progress |
 | B. Classical ML (15%) | 0 | 7 | 🔴 Not Started |
-| C. Deep Learning (25%) | 4 (+1 in progress) | 8 | 🟡 In Progress |
-| D. NLP (12%) | 0 | 6 | 🔴 Not Started |
+| C. Deep Learning & RL (25%) | 5 (+1 in progress) | 11 | 🟡 In Progress |
+| D. NLP & Multi-Modal (12%) | 0 | 10 | 🔴 Not Started |
 | E. ML System Design (18%) | 4 | 8 | 🟡 In Progress |
 | F. Practical ML (10%) | 3 | 6 | 🟡 In Progress |
 
@@ -25,11 +25,11 @@
 
 ## Study Priority (Based on Weights)
 
-1. 🔥 **Deep Learning (25%)** - Transformers, attention, CNNs, RNNs — GOOD PROGRESS
+1. 🔥 **Deep Learning & RL (25%)** - Transformers, attention, CNNs, RNNs, RL, RLHF — GOOD PROGRESS
 2. 🔥 **ML Fundamentals (20%)** - Gradient descent, bias-variance, regularization
 3. 📌 **ML System Design (18%)** - Pipelines, serving, A/B testing — STARTED
 4. 📌 **Classical ML (15%)** - Trees, SVM, clustering
-5. 📋 **NLP (12%)** - Embeddings, BERT, transformers for NLP
+5. 📋 **NLP & Multi-Modal (12%)** - Embeddings, BERT, ViT, CLIP, multi-modal LLMs
 6. 📋 **Practical ML (10%)** - Debugging, imbalanced data — STARTED
 
 ---
@@ -47,7 +47,7 @@
 |-------|---------------|------------|------------|
 | — | — | — | — |
 
-### C. Deep Learning
+### C. Deep Learning & RL
 | Topic | Date Mastered | Confidence | Key Points |
 |-------|---------------|------------|------------|
 | **C.21 Transformers & Self-Attention** | 2026-02-02 | High | • Self-attention solves RNN bottlenecks (parallel + direct connections)<br>• O(n²) complexity trade-off for long sequences<br>• Q, K, V mechanism: similarity-weighted information retrieval<br>• Positional encodings needed (RoPE, sinusoidal, learned)<br>• BERT (encoder, bidirectional) vs GPT (decoder, causal)<br>• Can explain architecture choices for different tasks |
@@ -55,8 +55,9 @@
 | **C.16 Backpropagation** | 2026-02-03 | High | • Chain rule applied layer-by-layer: ∂L/∂W₁ = (ŷ-y) × W₂ × ReLU'(z₁) × x<br>• Error signal (δ) computed once per layer, reused for all gradients<br>• ∂L/∂W = δ × (input to that layer)<br>• Vanishing gradients: small weights multiply → tiny gradients<br>• Exploding gradients: large weights multiply → huge gradients<br>• Solutions: ReLU, residual connections, gradient clipping |
 | **C.17 Softmax & Cross-Entropy Gradient** | 2026-02-03 | High | • Softmax: ŷᵢ = e^zᵢ / Σe^zⱼ<br>• Cross-entropy: L = -Σ yᵢ log(ŷᵢ)<br>• ∂ŷᵢ/∂zᵢ = ŷᵢ(1-ŷᵢ), ∂ŷᵢ/∂zⱼ = -ŷᵢ·ŷⱼ (i≠j)<br>• Final gradient: ∂L/∂zⱼ = ŷⱼ - yⱼ (same as binary!)<br>• One-hot vector sums to 1 → enables simplification<br>• Practical benefits: numerical stability, simple implementation |
 | **C.18 BatchNorm vs LayerNorm** *(in progress)* | 2026-02-09 | Medium | • BatchNorm: across batch dim; LayerNorm: across feature dim<br>• LayerNorm for NLP: no batch dependency, same at train/test<br>• Padding pollution issue with BatchNorm on variable-length sequences<br>• RMSNorm: removes mean centering + beta, ~10-15% faster<br>• ⚠️ Review needed: BatchNorm placement (before activation), RMSNorm details |
+| **C.23 Training Techniques - Unified SFT/Distillation/RL Framework** | 2026-02-10 | Medium-High | • 2x2 framework: (on/off-policy) × (sparse/dense signal)<br>• All four share gradient: weight × ∇log π_θ(y\|x)<br>• SFT weight=𝟙(y=y*), RL weight=r(x,y), Distillation weight=π_teacher<br>• On vs off-policy: who generates data (student vs fixed dataset)<br>• Sparse vs dense: one-hot/reward vs full teacher distribution<br>• IS unification: off-policy methods get π_data/π_θ correction<br>• SFT = sparse RL with indicator reward<br>• RL can surpass teacher (no ceiling); distillation bounded by teacher |
 
-### D. NLP
+### D. NLP & Multi-Modal
 | Topic | Date Mastered | Confidence | Key Points |
 |-------|---------------|------------|------------|
 | — | — | — | — |
@@ -64,17 +65,17 @@
 ### E. ML System Design
 | Topic | Date Mastered | Confidence | Key Points |
 |-------|---------------|------------|------------|
-| **E.30 End-to-End ML Pipeline Design** | 2026-02-03 | Medium-High | • Start with business metrics, not models<br>• Pipeline: Requirements → Data → Features → Model → Serving → Evaluation<br>• Baseline first (heuristics/logistic regression), iterate to complexity<br>• Always frame improvements relative to current system |
-| **E.31 Feature Engineering & Feature Stores** | 2026-02-03 | Medium-High | • Offline (Spark/Hive, batch) vs Online (Flink/Redis, streaming)<br>• Training-serving skew: same feature computed differently<br>• Solutions: log-and-wait, unified computation, feature validation<br>• Some features fundamentally different: percentiles, global aggs, joins, ranks<br>• Hybrid: slow-changing offline, fast-changing online |
-| **E.35 A/B Testing & Experimentation** | 2026-02-03 | Medium-High | • ML tests harder: delayed feedback, smaller effects, feedback loops<br>• Novelty effects, position bias<br>• Filter bubble: only learn about what you show<br>• Solutions: exploration (epsilon-greedy, Thompson sampling), IPW<br>• Feature leakage: temporal availability at prediction time |
-| **E.36 Monitoring & Model Degradation** | 2026-02-09 | Medium-High | • Three drift types: covariate, label, concept<br>• Label shift = same pattern, different rate; Concept drift = relationship changes<br>• 4-layer monitoring: data, model, operational, business<br>• Operational monitoring segmented by pipeline step<br>• Alert tiering: P0 (immediate), P1 (hours), P2 (daily)<br>• Prevention: scheduled retraining, online learning, human-in-the-loop |
+| **E.34 End-to-End ML Pipeline Design** | 2026-02-03 | Medium-High | • Start with business metrics, not models<br>• Pipeline: Requirements → Data → Features → Model → Serving → Evaluation<br>• Baseline first (heuristics/logistic regression), iterate to complexity<br>• Always frame improvements relative to current system |
+| **E.35 Feature Engineering & Feature Stores** | 2026-02-03 | Medium-High | • Offline (Spark/Hive, batch) vs Online (Flink/Redis, streaming)<br>• Training-serving skew: same feature computed differently<br>• Solutions: log-and-wait, unified computation, feature validation<br>• Some features fundamentally different: percentiles, global aggs, joins, ranks<br>• Hybrid: slow-changing offline, fast-changing online |
+| **E.39 A/B Testing & Experimentation** | 2026-02-03 | Medium-High | • ML tests harder: delayed feedback, smaller effects, feedback loops<br>• Novelty effects, position bias<br>• Filter bubble: only learn about what you show<br>• Solutions: exploration (epsilon-greedy, Thompson sampling), IPW<br>• Feature leakage: temporal availability at prediction time |
+| **E.40 Monitoring & Model Degradation** | 2026-02-09 | Medium-High | • Three drift types: covariate, label, concept<br>• Label shift = same pattern, different rate; Concept drift = relationship changes<br>• 4-layer monitoring: data, model, operational, business<br>• Operational monitoring segmented by pipeline step<br>• Alert tiering: P0 (immediate), P1 (hours), P2 (daily)<br>• Prevention: scheduled retraining, online learning, human-in-the-loop |
 
 ### F. Practical ML
 | Topic | Date Mastered | Confidence | Key Points |
 |-------|---------------|------------|------------|
-| **F.39 Handling Imbalanced Data** | 2026-02-09 | Medium-High | • Weighted cross-entropy: weight rare class more, derived gradient (49x larger for minority)<br>• Focal loss: (1-ŷ)^γ modulator, γ=0 reduces to weighted CE (RetinaNet, 2017)<br>• Sampling: oversampling/SMOTE, undersampling, data augmentation<br>• Threshold tuning as simplest first approach<br>• Connected to AUC-ROC and AUC-PR for evaluation |
-| **F.42 Model Interpretability (SHAP)** | 2026-02-09 | Medium | • Shapley values from game theory: average marginal contribution across all orderings<br>• Exact computation is O(n!) — intractable<br>• Approximations: TreeSHAP O(TLD²), KernelSHAP, DeepSHAP<br>• Advantages over feature importance: local explanations, directionality, theoretical guarantees<br>• Guarantees: efficiency (sum to prediction), symmetry, null player |
-| **F.38 Debugging Training Issues** | 2026-02-09 | Medium-High | • Debugging hierarchy: data → sanity checks → training mechanics → regularization<br>• Initial loss sanity check: should be log(k) for k classes; LLMs ~10.4 for 32k vocab<br>• Overfit tiny batch as first diagnostic (validates entire pipeline)<br>• NaN causes: log(0), exp overflow, 0/0 derivatives, exploding gradients<br>• Sudden NaN: weight growth, model overconfidence, bad batch, LR schedule<br>• Overfitting (train↓ eval↑) vs underfitting (both high) — opposite fixes |
+| **F.43 Handling Imbalanced Data** | 2026-02-09 | Medium-High | • Weighted cross-entropy: weight rare class more, derived gradient (49x larger for minority)<br>• Focal loss: (1-ŷ)^γ modulator, γ=0 reduces to weighted CE (RetinaNet, 2017)<br>• Sampling: oversampling/SMOTE, undersampling, data augmentation<br>• Threshold tuning as simplest first approach<br>• Connected to AUC-ROC and AUC-PR for evaluation |
+| **F.46 Model Interpretability (SHAP)** | 2026-02-09 | Medium | • Shapley values from game theory: average marginal contribution across all orderings<br>• Exact computation is O(n!) — intractable<br>• Approximations: TreeSHAP O(TLD²), KernelSHAP, DeepSHAP<br>• Advantages over feature importance: local explanations, directionality, theoretical guarantees<br>• Guarantees: efficiency (sum to prediction), symmetry, null player |
+| **F.42 Debugging Training Issues** | 2026-02-09 | Medium-High | • Debugging hierarchy: data → sanity checks → training mechanics → regularization<br>• Initial loss sanity check: should be log(k) for k classes; LLMs ~10.4 for 32k vocab<br>• Overfit tiny batch as first diagnostic (validates entire pipeline)<br>• NaN causes: log(0), exp overflow, 0/0 derivatives, exploding gradients<br>• Sudden NaN: weight growth, model overconfidence, bad batch, LR schedule<br>• Overfitting (train↓ eval↑) vs underfitting (both high) — opposite fixes |
 
 ---
 
@@ -117,7 +118,7 @@
 - [ ] Explain SVM margin and kernel trick
 - [ ] Describe K-means algorithm and limitations
 
-**Deep Learning**
+**Deep Learning & RL**
 - [x] Walk through backpropagation step by step
 - [x] Explain vanishing gradients and solutions
 - [x] Describe attention mechanism and transformers in detail
@@ -125,11 +126,19 @@
 - [x] Explain multi-head attention and W^O projection
 - [x] Derive softmax + cross-entropy gradient
 - [ ] Compare batch norm vs layer norm (in progress — review details)
+- [x] Explain unified SFT/Distillation/RL gradient framework
+- [ ] Explain RL fundamentals (MDP, Bellman, on/off-policy)
+- [ ] Describe policy gradient methods (REINFORCE, PPO, GRPO)
+- [ ] Explain RLHF and DPO for LLM alignment
 
-**NLP**
+**NLP & Multi-Modal**
 - [ ] Explain Word2Vec (skip-gram and CBOW)
 - [x] Describe transformer architecture
 - [ ] Explain BERT pre-training objectives
+- [ ] Explain Vision Transformers (ViT) and patch embeddings
+- [ ] Describe CLIP and contrastive learning
+- [ ] Explain multi-modal LLM architectures
+- [ ] Describe diffusion models and video generation
 
 **System Design**
 - [x] Design an end-to-end ML pipeline
@@ -151,10 +160,11 @@
 4. [x] Multi-head attention - why multiple heads? (COMPLETED)
 5. [x] C.16 Backpropagation for simple neural network (COMPLETED)
 6. [x] Softmax & cross-entropy gradient (multi-class extension) (COMPLETED)
-7. [x] E.30 End-to-end ML pipeline design (COMPLETED)
+7. [x] E.34 End-to-end ML pipeline design (COMPLETED)
 
 ### Upcoming Topics
-- [x] E.36 Monitoring and model degradation (COMPLETED 2026-02-09)
+- [x] E.40 Monitoring and model degradation (COMPLETED 2026-02-09)
+- [x] C.23 Unified SFT/Distillation/RL framework (COMPLETED 2026-02-10)
 - [ ] Batch norm vs Layer norm (IN PROGRESS — review details needed)
 - [ ] C.19 CNNs (convolutions, pooling, architectures)
 - [ ] C.20 RNNs, LSTMs, GRUs (vanishing gradients, gating)
@@ -178,6 +188,7 @@
 | 2026-02-02 (Session 3) | C.21 Transformers & self-attention mechanism | • **Student had exceptional baseline knowledge!**<br>• Structured understanding into interview-ready format<br>• Self-attention: Q, K, V mechanism and O(n²) trade-off<br>• Positional encodings: RoPE, sinusoidal, learned<br>• BERT vs GPT: encoder/decoder, bidirectional/causal<br>• Applied knowledge to practical scenarios<br>• **3 topics mastered in one day!** | • Minor: didn't know about causal masking in GPT (added)<br>• Minor: less familiar with all positional encoding types (covered) |
 | 2026-02-03 (Session 4) | Multi-head attention, Backprop, Softmax+CE, ML Pipelines | • **4 major topics in one session!**<br>• Strong math derivations for backprop and softmax<br>• Connected concepts across sessions<br>• ML System Design shows real-world experience<br>• Can whiteboard multi-head attention and gradients | • Minor derivative mechanics (corrected in session)<br>• Could use more system design practice |
 | 2026-02-09 (Session 5) | E.36 Monitoring, C.18 Norms, F.39 Imbalance, A.8 AUC review, F.42 SHAP, F.38 Debugging | • Built 4-layer monitoring framework (interview-ready)<br>• Mastered drift types and weighted CE gradient derivation<br>• Learned focal loss, SHAP/Shapley values, AUC-PR<br>• Systematic debugging framework (4-row table)<br>• Strong cross-topic connections throughout<br>• **6 topics in one session — most productive yet!** | • ROC axes swapped again (recurring)<br>• BatchNorm placement corrected<br>• L1/Lasso distinction corrected<br>• Sudden NaN reasoning needed guidance |
+| 2026-02-10 (Session 6) | C.23 Unified SFT/Distillation/RL Framework | • Built complete 2x2 framework (on/off-policy × sparse/dense) Socratically<br>• Derived unified gradient: weight × ∇log π_θ for all four methods<br>• Applied importance sampling to unify off-policy under on-policy expectation<br>• Proved SFT = sparse RL with indicator reward<br>• Strong practical trade-off reasoning (RL vs distillation) | • IS application: forgot π_data in numerator (minor)<br>• Initially confused On-Policy Distillation with RL (added reward where none exists) |
 
 ---
 

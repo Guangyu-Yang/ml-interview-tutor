@@ -5,6 +5,7 @@ An interactive AI tutor powered by Claude Code that helps you prepare for machin
 ## Features
 
 - **Structured Quiz Mode**: 3-step workflow (category → depth → topic) for focused practice
+- **Article/Paper Quiz Mode**: Bring any article, paper, or tech blog — the tutor extracts key concepts and creates a Socratic quiz from it
 - **Socratic Method**: Assesses what you know before teaching
 - **Flexible Depth Levels**: Choose high-level concepts, mathematical derivations, or implementation details
 - **8 Topic Categories**: From ML fundamentals to LLMs to system design
@@ -34,7 +35,7 @@ An interactive AI tutor powered by Claude Code that helps you prepare for machin
    claude
    ```
 
-3. Start learning! Two ways to practice:
+3. Start learning! Three ways to practice:
 
    **Option A: Structured Quiz Mode** (Recommended)
    - Type: `"quiz me"` or `"I want to practice"`
@@ -42,7 +43,13 @@ An interactive AI tutor powered by Claude Code that helps you prepare for machin
    - Choose depth level (1-3): High-level, Mathematical, or Implementation
    - Get a tailored question and start learning!
 
-   **Option B: Direct Questions**
+   **Option B: Article/Paper Quiz Mode**
+   - Share a link: `"Create a quiz from this article: [URL]"`
+   - Or paste content directly: `"Here's an article, quiz me on it: [pasted text]"`
+   - Supports any ML-related web content: articles, papers, blog posts, documentation
+   - The tutor extracts key concepts, maps them to study domains, and walks through them Socratically
+
+   **Option C: Direct Questions**
    - "Explain the bias-variance tradeoff"
    - "Help me understand attention mechanisms"
    - "Derive the gradient for logistic regression"
@@ -54,8 +61,13 @@ An interactive AI tutor powered by Claude Code that helps you prepare for machin
 ml-interview-tutor/
 ├── CLAUDE.md                    # Instructions for Claude Code
 ├── README.md                    # This file
+├── LICENSE                      # MIT license
+├── agents/                      # Specialized tutor behaviors
+├── hooks/                       # Claude Code hooks
+│   └── session-start-suggester.sh
 ├── progress/
 │   └── ml-study-tracker.md      # Your progress tracker (single source of truth)
+├── references/                  # Reference materials
 └── sessions/
     ├── SESSION-TEMPLATE.md      # Template for session notes
     └── YYYY-MM-DD/
@@ -68,11 +80,11 @@ ml-interview-tutor/
 
 | Domain | Weight | Key Topics |
 |--------|--------|------------|
-| Deep Learning | 25% | Transformers, attention, CNNs, RNNs, backprop |
+| Deep Learning & RL | 25% | Transformers, attention, CNNs, RNNs, policy gradients, RLHF |
 | ML Fundamentals | 20% | Gradient descent, bias-variance, regularization |
 | ML System Design | 18% | Pipelines, serving, A/B testing, monitoring |
 | Classical ML | 15% | Trees, SVM, clustering, logistic regression |
-| NLP | 12% | Embeddings, BERT, language models |
+| NLP & Multi-Modal | 12% | Embeddings, BERT, ViT, CLIP, multi-modal LLMs, diffusion |
 | Practical ML | 10% | Debugging, imbalanced data, tuning |
 
 ### Detailed Topics
@@ -81,9 +93,9 @@ ml-interview-tutor/
 
 **Classical ML**: Linear/logistic regression, decision trees, random forests, XGBoost, SVM, clustering, PCA
 
-**Deep Learning**: Neural networks, backpropagation, CNNs, RNNs/LSTMs, Transformers, attention mechanisms, normalization
+**Deep Learning & RL**: Neural networks, backpropagation, CNNs, RNNs/LSTMs, Transformers, attention mechanisms, normalization, RL fundamentals, policy gradients, RLHF/DPO
 
-**NLP**: Word embeddings, sequence models, BERT, GPT, fine-tuning
+**NLP & Multi-Modal**: Word embeddings, sequence models, BERT, GPT, fine-tuning, ViT, CLIP, multi-modal LLMs, diffusion models
 
 **System Design**: Feature engineering, training pipelines, model serving, A/B testing, monitoring, data drift
 
@@ -102,6 +114,17 @@ ml-interview-tutor/
    - Implementation Details (algorithms, code, architecture)
 
 3. **Practice Topic**: Get a tailored question based on your selections
+
+### Article/Paper Quiz Mode
+
+Bring any external resource and turn it into a study session:
+
+1. **Share a link or paste content** from an article, paper, or tech blog
+2. **Tutor analyzes** the material and identifies key technical concepts
+3. **Maps to study domains** and generates a focused quiz topic
+4. **Walks through Socratically** — doesn't just re-state the article, but guides you to deeply internalize the concepts through questioning
+
+Works with any ML-related web content. If a URL is blocked, just paste the content directly.
 
 ### Direct Question Mode
 
