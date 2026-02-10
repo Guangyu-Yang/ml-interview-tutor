@@ -1,10 +1,10 @@
 # ML Interview Study Tracker
 
-**Last Updated**: 2026-02-03
+**Last Updated**: 2026-02-09
 
 **Target Interview Date**: [Your interview date]
 
-**Overall Interview Readiness**: 22%
+**Overall Interview Readiness**: 27%
 
 ---
 
@@ -14,9 +14,9 @@
 |--------|---------------|--------------|--------|
 | A. ML Fundamentals (20%) | 2 | 8 | 🟡 In Progress |
 | B. Classical ML (15%) | 0 | 7 | 🔴 Not Started |
-| C. Deep Learning (25%) | 4 | 8 | 🟡 In Progress |
+| C. Deep Learning (25%) | 4 (+1 in progress) | 8 | 🟡 In Progress |
 | D. NLP (12%) | 0 | 6 | 🔴 Not Started |
-| E. ML System Design (18%) | 3 | 8 | 🟡 In Progress |
+| E. ML System Design (18%) | 4 | 8 | 🟡 In Progress |
 | F. Practical ML (10%) | 0 | 6 | 🔴 Not Started |
 
 **Status Legend**: 🔴 Not Started | 🟡 In Progress | 🟢 Interview Ready
@@ -54,6 +54,7 @@
 | **C.21 Multi-Head Attention** | 2026-02-03 | High | • Different heads learn different relationship types (syntactic, semantic, positional)<br>• Examples: subject-verb, pronoun resolution, induction heads<br>• d_k = d_model / num_heads (e.g., 512/8 = 64)<br>• W^O projection fuses knowledge across heads<br>• More heads needed for complex sequences (more patterns to capture) |
 | **C.16 Backpropagation** | 2026-02-03 | High | • Chain rule applied layer-by-layer: ∂L/∂W₁ = (ŷ-y) × W₂ × ReLU'(z₁) × x<br>• Error signal (δ) computed once per layer, reused for all gradients<br>• ∂L/∂W = δ × (input to that layer)<br>• Vanishing gradients: small weights multiply → tiny gradients<br>• Exploding gradients: large weights multiply → huge gradients<br>• Solutions: ReLU, residual connections, gradient clipping |
 | **C.17 Softmax & Cross-Entropy Gradient** | 2026-02-03 | High | • Softmax: ŷᵢ = e^zᵢ / Σe^zⱼ<br>• Cross-entropy: L = -Σ yᵢ log(ŷᵢ)<br>• ∂ŷᵢ/∂zᵢ = ŷᵢ(1-ŷᵢ), ∂ŷᵢ/∂zⱼ = -ŷᵢ·ŷⱼ (i≠j)<br>• Final gradient: ∂L/∂zⱼ = ŷⱼ - yⱼ (same as binary!)<br>• One-hot vector sums to 1 → enables simplification<br>• Practical benefits: numerical stability, simple implementation |
+| **C.18 BatchNorm vs LayerNorm** *(in progress)* | 2026-02-09 | Medium | • BatchNorm: across batch dim; LayerNorm: across feature dim<br>• LayerNorm for NLP: no batch dependency, same at train/test<br>• Padding pollution issue with BatchNorm on variable-length sequences<br>• RMSNorm: removes mean centering + beta, ~10-15% faster<br>• ⚠️ Review needed: BatchNorm placement (before activation), RMSNorm details |
 
 ### D. NLP
 | Topic | Date Mastered | Confidence | Key Points |
@@ -66,6 +67,7 @@
 | **E.30 End-to-End ML Pipeline Design** | 2026-02-03 | Medium-High | • Start with business metrics, not models<br>• Pipeline: Requirements → Data → Features → Model → Serving → Evaluation<br>• Baseline first (heuristics/logistic regression), iterate to complexity<br>• Always frame improvements relative to current system |
 | **E.31 Feature Engineering & Feature Stores** | 2026-02-03 | Medium-High | • Offline (Spark/Hive, batch) vs Online (Flink/Redis, streaming)<br>• Training-serving skew: same feature computed differently<br>• Solutions: log-and-wait, unified computation, feature validation<br>• Some features fundamentally different: percentiles, global aggs, joins, ranks<br>• Hybrid: slow-changing offline, fast-changing online |
 | **E.35 A/B Testing & Experimentation** | 2026-02-03 | Medium-High | • ML tests harder: delayed feedback, smaller effects, feedback loops<br>• Novelty effects, position bias<br>• Filter bubble: only learn about what you show<br>• Solutions: exploration (epsilon-greedy, Thompson sampling), IPW<br>• Feature leakage: temporal availability at prediction time |
+| **E.36 Monitoring & Model Degradation** | 2026-02-09 | Medium-High | • Three drift types: covariate, label, concept<br>• Label shift = same pattern, different rate; Concept drift = relationship changes<br>• 4-layer monitoring: data, model, operational, business<br>• Operational monitoring segmented by pipeline step<br>• Alert tiering: P0 (immediate), P1 (hours), P2 (daily)<br>• Prevention: scheduled retraining, online learning, human-in-the-loop |
 
 ### F. Practical ML
 | Topic | Date Mastered | Confidence | Key Points |
@@ -80,14 +82,16 @@
 - None identified yet
 
 ### 🟡 Medium Priority (Should review)
-- Monitoring & model degradation in production (not yet covered)
 - Full end-to-end system design practice (need structured practice)
+- BatchNorm placement details (before vs after activation — original paper says before)
+- RMSNorm precise mechanics (removes mean centering + beta, not variance)
 
 ### 🟢 Recently Resolved
 | Gap | Resolution Date | Notes |
 |-----|-----------------|-------|
 | Chain rule application in multi-layer networks | 2026-02-03 | Covered in backprop derivation |
 | Softmax derivative mechanics | 2026-02-03 | Derived both cases (i=j, i≠j) |
+| Monitoring & model degradation in production | 2026-02-09 | Built 4-layer monitoring framework, mastered drift types |
 
 ---
 
@@ -115,7 +119,7 @@
 - [x] Compare BERT vs GPT architectures and use cases
 - [x] Explain multi-head attention and W^O projection
 - [x] Derive softmax + cross-entropy gradient
-- [ ] Compare batch norm vs layer norm
+- [ ] Compare batch norm vs layer norm (in progress — review details)
 
 **NLP**
 - [ ] Explain Word2Vec (skip-gram and CBOW)
@@ -127,7 +131,8 @@
 - [x] Explain A/B testing for ML models
 - [x] Discuss feature store architecture and tradeoffs
 - [x] Identify and prevent feature leakage
-- [ ] Handle data drift scenarios
+- [x] Handle data drift scenarios (covariate, label, concept drift)
+- [x] Design a monitoring framework (4-layer: data, model, operational, business)
 - [ ] Discuss model serving trade-offs
 
 ---
@@ -144,8 +149,8 @@
 7. [x] E.30 End-to-end ML pipeline design (COMPLETED)
 
 ### Upcoming Topics
-- [ ] E.36 Monitoring and model degradation
-- [ ] Batch norm vs Layer norm
+- [x] E.36 Monitoring and model degradation (COMPLETED 2026-02-09)
+- [ ] Batch norm vs Layer norm (IN PROGRESS — review details needed)
 - [ ] C.19 CNNs (convolutions, pooling, architectures)
 - [ ] C.20 RNNs, LSTMs, GRUs (vanishing gradients, gating)
 - [ ] A.5 Bias-variance tradeoff
@@ -165,6 +170,7 @@
 | 2026-02-02 (Session 2) | A.3 Logistic regression gradient w/ L2 regularization | • **First use of 3-step structured workflow - success!**<br>• Derived complete gradient from first principles<br>• Mastered chain rule application in ML<br>• Understood beautiful simplification: ∂L/∂z = ŷ - y<br>• Can perform whiteboard derivation<br>• Grasped weight decay intuition | • Chain rule was fuzzy (resolved with review)<br>• Made errors on BCE derivative (corrected)<br>• Minor: didn't cover bias gradient or batch averaging |
 | 2026-02-02 (Session 3) | C.21 Transformers & self-attention mechanism | • **Student had exceptional baseline knowledge!**<br>• Structured understanding into interview-ready format<br>• Self-attention: Q, K, V mechanism and O(n²) trade-off<br>• Positional encodings: RoPE, sinusoidal, learned<br>• BERT vs GPT: encoder/decoder, bidirectional/causal<br>• Applied knowledge to practical scenarios<br>• **3 topics mastered in one day!** | • Minor: didn't know about causal masking in GPT (added)<br>• Minor: less familiar with all positional encoding types (covered) |
 | 2026-02-03 (Session 4) | Multi-head attention, Backprop, Softmax+CE, ML Pipelines | • **4 major topics in one session!**<br>• Strong math derivations for backprop and softmax<br>• Connected concepts across sessions<br>• ML System Design shows real-world experience<br>• Can whiteboard multi-head attention and gradients | • Minor derivative mechanics (corrected in session)<br>• Could use more system design practice |
+| 2026-02-09 (Session 5) | E.36 Monitoring & Degradation, C.18 BatchNorm vs LayerNorm | • Built 4-layer monitoring framework (interview-ready)<br>• Mastered drift types (covariate, label, concept)<br>• Strong operational monitoring with segmentation<br>• Understood BatchNorm vs LayerNorm trade-offs<br>• Quiz: weighted cross-entropy derivation started | • Label shift vs concept drift initially unclear (resolved)<br>• BatchNorm placement (corrected: before activation)<br>• RMSNorm details slightly inaccurate (corrected) |
 
 ---
 
