@@ -4,7 +4,7 @@
 
 **Target Interview Date**: [Your interview date]
 
-**Overall Interview Readiness**: 27%
+**Overall Interview Readiness**: 32%
 
 ---
 
@@ -17,7 +17,7 @@
 | C. Deep Learning (25%) | 4 (+1 in progress) | 8 | 🟡 In Progress |
 | D. NLP (12%) | 0 | 6 | 🔴 Not Started |
 | E. ML System Design (18%) | 4 | 8 | 🟡 In Progress |
-| F. Practical ML (10%) | 0 | 6 | 🔴 Not Started |
+| F. Practical ML (10%) | 2 | 6 | 🟡 In Progress |
 
 **Status Legend**: 🔴 Not Started | 🟡 In Progress | 🟢 Interview Ready
 
@@ -30,7 +30,7 @@
 3. 📌 **ML System Design (18%)** - Pipelines, serving, A/B testing — STARTED
 4. 📌 **Classical ML (15%)** - Trees, SVM, clustering
 5. 📋 **NLP (12%)** - Embeddings, BERT, transformers for NLP
-6. 📋 **Practical ML (10%)** - Debugging, imbalanced data
+6. 📋 **Practical ML (10%)** - Debugging, imbalanced data — STARTED
 
 ---
 
@@ -72,7 +72,8 @@
 ### F. Practical ML
 | Topic | Date Mastered | Confidence | Key Points |
 |-------|---------------|------------|------------|
-| — | — | — | — |
+| **F.39 Handling Imbalanced Data** | 2026-02-09 | Medium-High | • Weighted cross-entropy: weight rare class more, derived gradient (49x larger for minority)<br>• Focal loss: (1-ŷ)^γ modulator, γ=0 reduces to weighted CE (RetinaNet, 2017)<br>• Sampling: oversampling/SMOTE, undersampling, data augmentation<br>• Threshold tuning as simplest first approach<br>• Connected to AUC-ROC and AUC-PR for evaluation |
+| **F.42 Model Interpretability (SHAP)** | 2026-02-09 | Medium | • Shapley values from game theory: average marginal contribution across all orderings<br>• Exact computation is O(n!) — intractable<br>• Approximations: TreeSHAP O(TLD²), KernelSHAP, DeepSHAP<br>• Advantages over feature importance: local explanations, directionality, theoretical guarantees<br>• Guarantees: efficiency (sum to prediction), symmetry, null player |
 
 ---
 
@@ -85,6 +86,8 @@
 - Full end-to-end system design practice (need structured practice)
 - BatchNorm placement details (before vs after activation — original paper says before)
 - RMSNorm precise mechanics (removes mean centering + beta, not variance)
+- ROC axes confusion (recurring — swapped axes again in Session 5, need drilling)
+- AUC-PR interpretation nuances (don't compare to 0.5, compare to positive class rate)
 
 ### 🟢 Recently Resolved
 | Gap | Resolution Date | Notes |
@@ -104,6 +107,7 @@
 - [ ] Explain bias-variance tradeoff with examples
 - [x] Compare L1 vs L2 regularization (L2 covered in logistic regression)
 - [x] Explain AUC-ROC and when to use vs Precision@k
+- [x] Compare AUC-ROC vs AUC-PR for imbalanced data
 - [ ] Calculate precision, recall, F1 from confusion matrix
 
 **Classical ML**
@@ -159,6 +163,8 @@
 ### Review Scheduled
 - [ ] Multi-head attention (reinforce W^O understanding)
 - [ ] Backprop derivation (practice on whiteboard)
+- [ ] ROC axes drill (recurring confusion — FPR on x, TPR on y)
+- [ ] SHAP practice (explain Shapley values fluently)
 
 ---
 
@@ -170,7 +176,7 @@
 | 2026-02-02 (Session 2) | A.3 Logistic regression gradient w/ L2 regularization | • **First use of 3-step structured workflow - success!**<br>• Derived complete gradient from first principles<br>• Mastered chain rule application in ML<br>• Understood beautiful simplification: ∂L/∂z = ŷ - y<br>• Can perform whiteboard derivation<br>• Grasped weight decay intuition | • Chain rule was fuzzy (resolved with review)<br>• Made errors on BCE derivative (corrected)<br>• Minor: didn't cover bias gradient or batch averaging |
 | 2026-02-02 (Session 3) | C.21 Transformers & self-attention mechanism | • **Student had exceptional baseline knowledge!**<br>• Structured understanding into interview-ready format<br>• Self-attention: Q, K, V mechanism and O(n²) trade-off<br>• Positional encodings: RoPE, sinusoidal, learned<br>• BERT vs GPT: encoder/decoder, bidirectional/causal<br>• Applied knowledge to practical scenarios<br>• **3 topics mastered in one day!** | • Minor: didn't know about causal masking in GPT (added)<br>• Minor: less familiar with all positional encoding types (covered) |
 | 2026-02-03 (Session 4) | Multi-head attention, Backprop, Softmax+CE, ML Pipelines | • **4 major topics in one session!**<br>• Strong math derivations for backprop and softmax<br>• Connected concepts across sessions<br>• ML System Design shows real-world experience<br>• Can whiteboard multi-head attention and gradients | • Minor derivative mechanics (corrected in session)<br>• Could use more system design practice |
-| 2026-02-09 (Session 5) | E.36 Monitoring & Degradation, C.18 BatchNorm vs LayerNorm | • Built 4-layer monitoring framework (interview-ready)<br>• Mastered drift types (covariate, label, concept)<br>• Strong operational monitoring with segmentation<br>• Understood BatchNorm vs LayerNorm trade-offs<br>• Quiz: weighted cross-entropy derivation started | • Label shift vs concept drift initially unclear (resolved)<br>• BatchNorm placement (corrected: before activation)<br>• RMSNorm details slightly inaccurate (corrected) |
+| 2026-02-09 (Session 5) | E.36 Monitoring, C.18 Norms, F.39 Imbalance, A.8 AUC review, F.42 SHAP | • Built 4-layer monitoring framework (interview-ready)<br>• Mastered drift types and weighted CE gradient derivation<br>• Learned focal loss, SHAP/Shapley values, AUC-PR<br>• Strong cross-topic connections (AUC-ROC ↔ imbalance ↔ precision)<br>• **5 topics in one session — most productive yet!** | • ROC axes swapped again (recurring)<br>• BatchNorm placement corrected<br>• AUC probabilistic interpretation initially wrong (corrected)<br>• SHAP is new — needs practice |
 
 ---
 

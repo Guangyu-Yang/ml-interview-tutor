@@ -81,13 +81,88 @@
 
 ---
 
+---
+
+## Topic 3 (Quiz): F.39 Handling Imbalanced Data + Weighted Cross-Entropy
+
+### Student's Baseline
+- Knew BCE formula (missed negative sign — corrected)
+- Knew about weighted cross-entropy and focal loss concepts
+
+### Concepts Taught
+1. **Weighted cross-entropy** — derived formula, gradient analysis showing 49x larger gradient for minority class
+2. **Focal loss** — (1-ŷ)^γ modulating factor, γ=0 reduces to weighted CE, from RetinaNet paper (Lin et al., 2017)
+3. **Other approaches** — oversampling/SMOTE, undersampling, data augmentation, threshold tuning
+4. **Connected to AUC-ROC** — why AUC handles imbalance (TPR/FPR normalized within class)
+
+### Comprehension Checks
+- ✅ Correctly identified focal loss reduces to weighted CE when γ=0
+- ✅ Proposed valid imbalance solutions (sampling, augmentation)
+- ⚠️ Mixed up positive/negative classes initially in weighting (corrected)
+- ⚠️ Misinterpreted AUC=0.92 as "92% correct on the class" (corrected — it's ranking probability)
+
+### Assessment
+- **Confidence Level**: Medium-High
+- **Status**: Solid understanding of techniques, minor interpretation issues corrected
+
+---
+
+## Topic 4 (Review): A.8 AUC-ROC Reinforcement + AUC-PR
+
+### Concepts Reviewed/Taught
+1. **AUC-ROC axes** — student swapped axes again (same as Session 1). FPR on x, TPR on y. Mnemonic: F=First(x), T=Top(y)
+2. **Probabilistic interpretation** — correctly restated: "AUC of x means x chance positive scores higher than negative"
+3. **How AUC is calculated** — trapezoidal rule, threshold sweeping
+4. **Why random = 0.5** — coin flip on ranking
+5. **AUC-PR** — precision doesn't involve TN, so not diluted by massive TN in imbalanced data
+6. **AUC-PR baseline** — equals positive class rate (0.02), not 0.5. Judge by magnitude of improvement
+
+### Comprehension Checks
+- ✅ Excellent final summary of AUC-ROC vs AUC-PR comparison
+- ⚠️ Swapped ROC axes again — needs reinforcement
+- ⚠️ Initially said AUC-PR 0.03 vs 0.02 is "strong improvement" (corrected — only 1.5x)
+- ⚠️ Said AUC-PR "uses fn to replace tn" (corrected — precision simply doesn't involve TN)
+
+### Assessment
+- **Confidence Level**: Medium-High (improved from Session 1, but axes still need drilling)
+
+---
+
+## Topic 5 (Quiz): F.42 SHAP & Model Interpretability
+
+### Student's Baseline
+- No prior knowledge of SHAP
+
+### Concepts Taught
+1. **Shapley values from game theory** — feature contribution = marginal impact averaged over all orderings
+2. **Weighting formula** — |S|!×(|F|-|S|-1)!/|F|! explained via ordering counting
+3. **Worker building a house analogy** — "joining first/second/third" = position in arrival order
+4. **Computational complexity** — O(n!), intractable for real models
+5. **Practical approximations** — sampling, TreeSHAP O(TLD²), KernelSHAP, DeepSHAP
+6. **SHAP vs feature importance** — local vs global, directionality, theoretical guarantees (efficiency, symmetry, null player)
+
+### Comprehension Checks
+- ✅ Understood n! complexity
+- ✅ Understood γ=0 focal loss connection
+- ✅ Gave strong interview-ready summary of SHAP
+
+### Assessment
+- **Confidence Level**: Medium — understood concepts well, but brand new topic needs practice
+- **Status**: Covered fundamentals, could dive deeper into TreeSHAP mechanics
+
+---
+
 ## Key Insights
 - Student has strong real-world production ML experience
 - Good at building frameworks but sometimes imprecise on mathematical details
-- Responds well to concrete examples (fraud detection scenario was very effective)
+- Responds well to concrete examples (fraud detection scenario, house-building analogy)
 - Segmentation insight for operational monitoring shows engineering maturity
+- ROC axes confusion is recurring — needs targeted drilling
+- Strong at connecting concepts across topics when guided
 
 ## Follow-up Topics
 - C.19 CNNs (next on study plan)
 - Review BatchNorm/LayerNorm details
-- Continue class imbalance gradient derivation
+- Drill ROC axes (recurring confusion)
+- Practice SHAP explanations
+- TreeSHAP deeper dive
