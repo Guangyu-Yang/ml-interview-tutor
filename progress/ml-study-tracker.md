@@ -1,10 +1,10 @@
 # ML Interview Study Tracker
 
-**Last Updated**: 2026-02-10
+**Last Updated**: 2026-02-17
 
 **Target Interview Date**: [Your interview date]
 
-**Overall Interview Readiness**: 37%
+**Overall Interview Readiness**: 54%
 
 ---
 
@@ -12,11 +12,11 @@
 
 | Domain | Topics Covered | Total Topics | Status |
 |--------|---------------|--------------|--------|
-| A. ML Fundamentals (20%) | 2 | 8 | 🟡 In Progress |
+| A. ML Fundamentals (20%) | 3 | 8 | 🟡 In Progress |
 | B. Classical ML (15%) | 0 | 7 | 🔴 Not Started |
-| C. Deep Learning & RL (25%) | 5 (+1 in progress) | 11 | 🟡 In Progress |
-| D. NLP & Multi-Modal (12%) | 0 | 10 | 🔴 Not Started |
-| E. ML System Design (18%) | 4 | 8 | 🟡 In Progress |
+| C. Deep Learning & RL (25%) | 6 (+2 in progress) | 11 | 🟡 In Progress |
+| D. NLP & Multi-Modal (12%) | 1 | 10 | 🟡 In Progress |
+| E. ML System Design (18%) | 8 | 8 | 🟢 Interview Ready |
 | F. Practical ML (10%) | 3 | 6 | 🟡 In Progress |
 
 **Status Legend**: 🔴 Not Started | 🟡 In Progress | 🟢 Interview Ready
@@ -27,7 +27,7 @@
 
 1. 🔥 **Deep Learning & RL (25%)** - Transformers, attention, CNNs, RNNs, RL, RLHF — GOOD PROGRESS
 2. 🔥 **ML Fundamentals (20%)** - Gradient descent, bias-variance, regularization
-3. 📌 **ML System Design (18%)** - Pipelines, serving, A/B testing — STARTED
+3. ✅ **ML System Design (18%)** - Pipelines, serving, A/B testing — COMPLETE (8/8)
 4. 📌 **Classical ML (15%)** - Trees, SVM, clustering
 5. 📋 **NLP & Multi-Modal (12%)** - Embeddings, BERT, ViT, CLIP, multi-modal LLMs
 6. 📋 **Practical ML (10%)** - Debugging, imbalanced data — STARTED
@@ -41,6 +41,7 @@
 |-------|---------------|------------|------------|
 | **A.8 Evaluation Metrics - AUC-ROC** | 2026-02-02 | Medium-High | • Measures ranking ability across all thresholds<br>• AUC = P(random positive ranks higher than random negative)<br>• Threshold-independent, handles imbalanced data<br>• AUC=0.5 (random), AUC=1.0 (perfect)<br>• Use AUC for flexible thresholds; Precision@k for fixed top-k<br>• ROC axes: x=FPR, y=TPR |
 | **A.3 Gradient Descent & Optimization - Logistic Regression** | 2026-02-02 | High | • Derived complete gradient from first principles<br>• Chain rule: ∂L/∂w = (∂L/∂ŷ)(∂ŷ/∂z)(∂z/∂w)<br>• Beautiful simplification: ∂L/∂z = ŷ - y<br>• Complete gradient: ∂L/∂w = (ŷ - y)x + λw<br>• L2 regularization adds λw term (weight decay)<br>• Can derive on whiteboard for interviews |
+| **A.3 Optimizers - SGD/Momentum/RMSProp/Adam/AdamW** | 2026-02-10 | Medium-High | • SGD: w = w - lr*dw (baseline)<br>• Momentum: accumulates gradient direction, cancels oscillation<br>• RMSProp: per-parameter adaptive LR via running avg of squared gradients<br>• Adam = Momentum + RMSProp + bias correction (m̂=m/(1-β₁ᵗ))<br>• β₂=0.999 needs correction longer than β₁=0.9<br>• AdamW: decouples weight decay from adaptive scaling (uniform regularization)<br>• Adam+L2 distorts regularization; AdamW applies λw directly to weights |
 
 ### B. Classical ML
 | Topic | Date Mastered | Confidence | Key Points |
@@ -56,19 +57,23 @@
 | **C.17 Softmax & Cross-Entropy Gradient** | 2026-02-03 | High | • Softmax: ŷᵢ = e^zᵢ / Σe^zⱼ<br>• Cross-entropy: L = -Σ yᵢ log(ŷᵢ)<br>• ∂ŷᵢ/∂zᵢ = ŷᵢ(1-ŷᵢ), ∂ŷᵢ/∂zⱼ = -ŷᵢ·ŷⱼ (i≠j)<br>• Final gradient: ∂L/∂zⱼ = ŷⱼ - yⱼ (same as binary!)<br>• One-hot vector sums to 1 → enables simplification<br>• Practical benefits: numerical stability, simple implementation |
 | **C.18 BatchNorm vs LayerNorm** *(in progress)* | 2026-02-09 | Medium | • BatchNorm: across batch dim; LayerNorm: across feature dim<br>• LayerNorm for NLP: no batch dependency, same at train/test<br>• Padding pollution issue with BatchNorm on variable-length sequences<br>• RMSNorm: removes mean centering + beta, ~10-15% faster<br>• ⚠️ Review needed: BatchNorm placement (before activation), RMSNorm details |
 | **C.23 Training Techniques - Unified SFT/Distillation/RL Framework** | 2026-02-10 | Medium-High | • 2x2 framework: (on/off-policy) × (sparse/dense signal)<br>• All four share gradient: weight × ∇log π_θ(y\|x)<br>• SFT weight=𝟙(y=y*), RL weight=r(x,y), Distillation weight=π_teacher<br>• On vs off-policy: who generates data (student vs fixed dataset)<br>• Sparse vs dense: one-hot/reward vs full teacher distribution<br>• IS unification: off-policy methods get π_data/π_θ correction<br>• SFT = sparse RL with indicator reward<br>• RL can surpass teacher (no ceiling); distillation bounded by teacher |
+| **C.23 Knowledge Distillation (Math)** *(in progress)* | 2026-02-17 | Medium | • Dark knowledge: soft probabilities encode inter-class relationships<br>• Temperature T softens distributions: p_i = e^(z_i/T) / Σe^(z_j/T)<br>• KL divergence loss (KL=0 when distributions match)<br>• Combined loss: L = α·T²·KL(teacher‖student) + (1-α)·CE(y, student)<br>• T² scaling compensates 1/T² gradient reduction from temperature<br>• α tradeoff: α=1 pure distillation (bounded by teacher), α=0 normal training<br>• ⚠️ Needs interview rehearsal next session |
 
 ### D. NLP & Multi-Modal
 | Topic | Date Mastered | Confidence | Key Points |
 |-------|---------------|------------|------------|
-| — | — | — | — |
+| **D.31 Contrastive Learning (InfoNCE)** | 2026-02-10 | High | • InfoNCE = cross-entropy over positive + in-batch negatives<br>• Temperature τ controls softmax sharpness (small=peaky, large=smooth)<br>• Larger batch = more hard negatives = finer-grained representations<br>• Projection head buffers encoder from info loss (discard after training)<br>• More important with aggressive augmentations<br>• InfoNCE preferred over triplet loss: richer gradients, no hard-negative mining needed |
 
 ### E. ML System Design
 | Topic | Date Mastered | Confidence | Key Points |
 |-------|---------------|------------|------------|
 | **E.34 End-to-End ML Pipeline Design** | 2026-02-03 | Medium-High | • Start with business metrics, not models<br>• Pipeline: Requirements → Data → Features → Model → Serving → Evaluation<br>• Baseline first (heuristics/logistic regression), iterate to complexity<br>• Always frame improvements relative to current system |
+| **E.34 Recommendation Systems - ID Embeddings & Cold Start** | 2026-02-10 | High | • Simple lookup (small scale) vs hashing/compositional embeddings (large scale)<br>• Multiple hash functions + sum/concat to reduce collisions<br>• Sum is lossy but memory efficient; concat preserves info but doubles dim<br>• Cold start: side features, content similarity, two-tower architecture<br>• Feedback loop problem: no exposure → no data → lower ranking → spiral<br>• Exploration strategies: epsilon-greedy, Thompson sampling, position-based |
+| **E.34 Listing Recommendation System Design** | 2026-02-10 | Medium-High | • Two-sided marketplace: user satisfaction + host fairness + platform revenue<br>• Retrieval: hard filters → BM25 + embedding ANN + collaborative filtering → RRF merge<br>• Ranking: DCN (pointwise, cross features) or Transformer (listwise, inter-item reasoning)<br>• Transformer masking: encoder (full), causal (order-dependent), prefix (independent)<br>• Labels: multi-objective weighted scoring w1*P(click) + w2*P(save) + w3*P(book)<br>• Re-ranking: diversity (MMR), freshness, host fairness, sponsored, geo/price spread |
 | **E.35 Feature Engineering & Feature Stores** | 2026-02-03 | Medium-High | • Offline (Spark/Hive, batch) vs Online (Flink/Redis, streaming)<br>• Training-serving skew: same feature computed differently<br>• Solutions: log-and-wait, unified computation, feature validation<br>• Some features fundamentally different: percentiles, global aggs, joins, ranks<br>• Hybrid: slow-changing offline, fast-changing online |
 | **E.39 A/B Testing & Experimentation** | 2026-02-03 | Medium-High | • ML tests harder: delayed feedback, smaller effects, feedback loops<br>• Novelty effects, position bias<br>• Filter bubble: only learn about what you show<br>• Solutions: exploration (epsilon-greedy, Thompson sampling), IPW<br>• Feature leakage: temporal availability at prediction time |
 | **E.40 Monitoring & Model Degradation** | 2026-02-09 | Medium-High | • Three drift types: covariate, label, concept<br>• Label shift = same pattern, different rate; Concept drift = relationship changes<br>• 4-layer monitoring: data, model, operational, business<br>• Operational monitoring segmented by pipeline step<br>• Alert tiering: P0 (immediate), P1 (hours), P2 (daily)<br>• Prevention: scheduled retraining, online learning, human-in-the-loop |
+| **E.38 Model Serving & Cost Optimization** | 2026-02-17 | Medium-High | • Model compression: distillation, quantization, pruning<br>• MoE: saves compute (8/256 experts) but NOT memory (full model loaded)<br>• Smart inference: model cascading/routing, speculative decoding<br>• Infrastructure: caching (exact + semantic), request batching, auto-scaling<br>• Semantic cache: embed queries → ANN search → threshold as precision-recall tradeoff<br>• Quantization math: s=(r_max-r_min)/(2^b-1), z=round(-r_min/s), q=round(r/s)+z<br>• Symmetric (weights, centered) vs asymmetric (activations, skewed e.g. ReLU)<br>• PTQ (fast, no retrain) vs QAT (better accuracy, uses STE for backprop through round)<br>• Cost prioritization: right-size → scaling → caching → cascading → compression |
 
 ### F. Practical ML
 | Topic | Date Mastered | Confidence | Key Points |
@@ -85,7 +90,9 @@
 - None identified yet
 
 ### 🟡 Medium Priority (Should review)
-- Full end-to-end system design practice (need structured practice)
+- Full end-to-end system design practice (three practices done — delivery improving steadily)
+- System design: always mention label sources early in summary
+- System design: be specific with feature examples (enumerate, don't generalize)
 - BatchNorm placement details (before vs after activation — original paper says before)
 - RMSNorm precise mechanics (removes mean centering + beta, not variance)
 - ROC axes confusion (recurring — swapped axes again in Session 5, need drilling)
@@ -136,7 +143,8 @@
 - [x] Describe transformer architecture
 - [ ] Explain BERT pre-training objectives
 - [ ] Explain Vision Transformers (ViT) and patch embeddings
-- [ ] Describe CLIP and contrastive learning
+- [x] Explain InfoNCE loss and contrastive learning fundamentals
+- [ ] Describe CLIP and text-image contrastive learning
 - [ ] Explain multi-modal LLM architectures
 - [ ] Describe diffusion models and video generation
 
@@ -147,7 +155,7 @@
 - [x] Identify and prevent feature leakage
 - [x] Handle data drift scenarios (covariate, label, concept drift)
 - [x] Design a monitoring framework (4-layer: data, model, operational, business)
-- [ ] Discuss model serving trade-offs
+- [x] Discuss model serving trade-offs and cost optimization
 
 ---
 
@@ -189,6 +197,12 @@
 | 2026-02-03 (Session 4) | Multi-head attention, Backprop, Softmax+CE, ML Pipelines | • **4 major topics in one session!**<br>• Strong math derivations for backprop and softmax<br>• Connected concepts across sessions<br>• ML System Design shows real-world experience<br>• Can whiteboard multi-head attention and gradients | • Minor derivative mechanics (corrected in session)<br>• Could use more system design practice |
 | 2026-02-09 (Session 5) | E.36 Monitoring, C.18 Norms, F.39 Imbalance, A.8 AUC review, F.42 SHAP, F.38 Debugging | • Built 4-layer monitoring framework (interview-ready)<br>• Mastered drift types and weighted CE gradient derivation<br>• Learned focal loss, SHAP/Shapley values, AUC-PR<br>• Systematic debugging framework (4-row table)<br>• Strong cross-topic connections throughout<br>• **6 topics in one session — most productive yet!** | • ROC axes swapped again (recurring)<br>• BatchNorm placement corrected<br>• L1/Lasso distinction corrected<br>• Sudden NaN reasoning needed guidance |
 | 2026-02-10 (Session 6) | C.23 Unified SFT/Distillation/RL Framework | • Built complete 2x2 framework (on/off-policy × sparse/dense) Socratically<br>• Derived unified gradient: weight × ∇log π_θ for all four methods<br>• Applied importance sampling to unify off-policy under on-policy expectation<br>• Proved SFT = sparse RL with indicator reward<br>• Strong practical trade-off reasoning (RL vs distillation) | • IS application: forgot π_data in numerator (minor)<br>• Initially confused On-Policy Distillation with RL (added reward where none exists) |
+| 2026-02-10 (Session 7) | D.31 Contrastive Learning, InfoNCE, ID Embeddings, Cold Start | • InfoNCE formula & cross-entropy connection mastered<br>• Temperature, batch size, projection head practical details<br>• ID embedding pipeline: simple lookup vs compositional embeddings<br>• Cold start: user & item sides, two-tower architecture<br>• Independently identified feedback loop / popularity bias problem<br>• 8 interconnected concepts in one session | • Initially wrote "InfoBCE" (typo, corrected)<br>• Temperature framing: said "randomization" instead of "sharpness" (minor) |
+| 2026-02-10 (Session 8) | E.34 System Design: Airbnb Relisting Detection | • First full end-to-end system design practice<br>• Strong problem framing (fraud/imbalanced, precision priority)<br>• Good retrieval design (geo filter + FAISS ANN)<br>• Solid feature categories and model selection philosophy<br>• Connected contrastive learning to practical system<br>• Label flywheel and tiered action concepts | • Interview delivery: jumped to features before pipeline structure<br>• Behavioral/network signals needed prompting<br>• Adversarial adaptation answer too vague initially |
+| 2026-02-10 (Session 9) | E.34 System Design: Listing Recommendation | • Pipeline-first delivery (big improvement over Session 8)<br>• Multi-stakeholder framing (two-sided marketplace)<br>• Deep ranking architecture discussion (DCN vs transformer, masking patterns)<br>• Creative prefix-mask transformer proposal<br>• Connected cold start/feedback loop across sessions<br>• Multi-objective scoring and re-ranking business logic | • Forgot hard filters in summary<br>• Missing problem framing opener and eval/monitoring closer<br>• CF retrieval path and revenue-based weights needed prompting |
+| 2026-02-10 (Session 10) | E.34 System Design: Family-Friendly Listings | • Best summary delivery of all 3 designs<br>• Strong integration design (ff_scorer as filter + boost + feature)<br>• Self-identified blind spot: metrics must segment by target audience<br>• Connected AUC-PR for imbalanced from Session 5<br>• Multi-modal fusion tradeoffs (separate scores vs embedding concat)<br>• Image classification for family-friendly — strong independent idea | • Label sources missing from summary<br>• Initial feature answer too brief<br>• "Family friendly" definition initially scattered |
+| 2026-02-10 (Session 11) | A.3 Optimizers: SGD → Momentum → RMSProp → Adam → AdamW | • Built complete optimizer progression step-by-step<br>• Strong momentum intuition (cancel oscillation, accumulate consistent direction)<br>• Good RMSProp numerical reasoning (amplification for rare parameters)<br>• Understood Adam bias correction and β₂ > β₁ implication<br>• AdamW: decoupled weight decay concept understood | • Bias correction: couldn't derive independently<br>• AdamW wording slightly imprecise<br>• SGD sign error (minor) |
+| 2026-02-17 (Session 12) | E.38 Cost Optimization, Quantization Math, QAT, Distillation Math | • Comprehensive cost optimization framework (compression, smart inference, infrastructure)<br>• Quantization formulas derived with concrete examples<br>• Symmetric vs asymmetric tradeoffs + when-to-use rules<br>• PTQ vs QAT: fake quantization mechanism, STE, deployment pipeline<br>• Distillation math: dark knowledge, temperature, KL divergence, T² scaling<br>• Semantic caching: connected threshold to precision-recall tradeoff<br>• Strong cross-session linking (temperature ↔ InfoNCE from Session 7)<br>• **ML System Design domain complete (8/8)!** | • Missed batching in interview answer<br>• Forgot STE in quantization summary<br>• QAT terminology: "fade" vs "fake"<br>• Distillation rehearsal incomplete |
 
 ---
 
